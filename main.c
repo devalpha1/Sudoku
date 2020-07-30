@@ -61,7 +61,18 @@ char fromIntToChar(int number)
 
 }
 
+void comparateurDeAncienChiffre(int i, char *tableau)
+{
+    int e = 0;
 
+    do
+    {
+        if( tableau[e] == tableau[i] )
+        {
+            tableau[i] = rand() % 9 + 1;
+            tableafromIntToChar(tableau[i]);
+        }
+    }while(
 int main()
 {
     char tableau[9] = { '1', '2', '3',
@@ -79,6 +90,9 @@ int main()
         tableau[i] = rand() % 9 + 1;
 
         tableau[i] = fromIntToChar(tableau[i]);
+
+        comparateurDeAncienChiffre(i, tableau);
+
     }
 
     for ( i = 0 ; i < 9 ; i++ )
