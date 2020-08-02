@@ -1,8 +1,13 @@
+/* La fonction fromIntToChar &
+   fromCharToChar sert pour la
+   fonction rand() .
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-int menu()
+int Menu()
 {
     int choix = 0;
     printf("\t\t - { Sudoku by Skywashi } -\n\n");
@@ -15,12 +20,7 @@ int menu()
 
 }
 
-void modificationTableau( char *tableau)
-{
-    tableau[4] = '1';
-}
-
-char fromIntToChar(int number)
+char FromIntToChar(int number)
 {
     if ( number == 1)
     {
@@ -59,63 +59,89 @@ char fromIntToChar(int number)
         return  '9';
     }
 
+    return 0;
+
 }
 
-void comparateurDeAncienChiffre(int i, char *tableau)
+void ComparateurDeAncienChiffre(int i, char *tableau)
 {
-    int e = 0;
+        int e = 0;
 
     do
     {
-        if( tableau[e] == tableau[i] )
+        if( tableau[e] == tableau[i] && e != 0 ) /* si */
         {
             tableau[i] = rand() % 9 + 1;
-            tableafromIntToChar(tableau[i]);
+            tableau = FromIntToChar(tableau[i]);
+
         }
-    }while(
-int main()
+        e++;
+    }while(e < i );
+}
+
+void AfficheTableau(char *tableau)
 {
-    char tableau[9] = { '1', '2', '3',
-                        '4', '5', '6',
-                        '7', '8', '9' };
-    int i = 0;
+    printf("%c %c %c\n", tableau[0], tableau[1], tableau[2]);
+    printf("%c %c %c\n", tableau[3], tableau[4], tableau[5]);
+    printf("%c %c %c\n", tableau[6], tableau[7], tableau[8]);
+}
 
-    srand(time(NULL));
+void NouvellePartie()
+{
+    char tableau[9] = { ' ', ' ', ' ',
+                        ' ', ' ', ' ',
+                        ' ', ' ', ' ' };
+    int nombreDeCasePredefinie = 4, caseAPredefinir = 0, i = 0, x = 0, y = 0;
 
-    tableau[0] = rand() % 9 + 1;
-    tableau[0] = fromIntToChar(tableau[0]);
+    caseAPredefinir = rand() % 8 + 0;
+    tableau[caseAPredefinir] = rand() % 9 + 1; /*la première case aura un chiffre entre 9 et 1 $
+                                   tableau aura un chiffre */
+    tableau[caseAPredefinir] = FromIntToChar(tableau[caseAPredefinir]);
 
-    for( i = 1 ; i < 9 ; i++ )
+    for( i = 0 ; i < nombreDeCasePredefinie ; i++ )
     {
-        tableau[i] = rand() % 9 + 1;
-
-        tableau[i] = fromIntToChar(tableau[i]);
-
-        comparateurDeAncienChiffre(i, tableau);
-
+        caseAPredefinir = rand() % 8 + 0;
+        tableau[caseAPredefinir] = rand() % 9 + 1;
+        tableau[caseAPredefinir] = FromIntToChar(tableau[caseAPredefinir]);
+        ComparateurDeAncienChiffre(caseAPredefinir, tableau);
     }
+
+    AfficheTableau(tableau);
 
     for ( i = 0 ; i < 9 ; i++ )
     {
-        printf("%c : %d\n\n", tableau[i], tableau[i]); // affiche 5 normalement
+        printf("%c : %d\n\n", tableau[i], tableau[i]); // affiche 9 normalement
     }
-
-    modificationTableau(tableau);
 
     printf("%c : %d\n\n",tableau[4], tableau[4]);
 
-    scanf("%c", &tableau[4]);
+    printf("Quel case vous voulez modifier ?\n\n");
+    printf("x = ?");
+    scanf("%d", &x);
+    printf("y = ?");
+    scanf("%d", &y);
 
-    printf("%c : %d\n\n", tableau[4], tableau[4]);
+    /* ici la suite du programme pour définir en fonction de x et y */
+
+}
+
+/* ici le programme commence */
+int main()
+{
 
 
-    do
+    srand(time(NULL));
+
+
+    switch( Menu() )
     {
+        case 1:
+            NouvellePartie();
+        case 2:
+            printf("Merci d'avoir utilisee le programme ;) ");
+            break;
 
-    }while( menu() != 2 );
-
-
-
+    }
 
     return 0;
 }
