@@ -1,5 +1,9 @@
 # depslib dependency file v1.0
-1594664473 source:e:\language c\sdz 2020\sudoku\main.c
+1601804335 source:e:\language c\sdz 2020\sudoku\main.c
 	<stdio.h>
 	<stdlib.h>
+	<time.h>
+	"jeu.h"
+
+1601804064 e:\language c\sdz 2020\sudoku\jeu.h
 
